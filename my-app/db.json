@@ -20,6 +20,13 @@
       "preco": 210,
       "estoque": 8,
       "avatar": "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=120&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "PFBBpR9eA_c",
+      "nome": "Filtro de Linha",
+      "preco": "150",
+      "estoque": "10",
+      "avatar": ""
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
