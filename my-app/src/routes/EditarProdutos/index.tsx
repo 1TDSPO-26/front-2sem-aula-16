@@ -13,7 +13,7 @@ export default function EditarProdutos() {
     //Declarando os componentes do hookForm
     const{register, handleSubmit, setValue, reset, formState: {errors}} = useForm<TipoProdutoJ>({
         defaultValues: {id: "", nome: "", preco: 0, estoque: 0, avatar: ""}, 
-        mode:"onBlur"});
+        mode:"onChange"});
 
     //Recuperar o parâmetro da rota através do hook useParams, desestruturando o objeto 
 
@@ -38,6 +38,7 @@ export default function EditarProdutos() {
                     const data:TipoProdutoJ = await resposta.json();
                     console.log(data);
                     setProduto(data);
+                    reset(data);
     
                 } catch (error) {
                     console.error(error);
@@ -85,20 +86,23 @@ export default function EditarProdutos() {
                         <legend>Dados do Produto</legend>
                         <div>
                             <label htmlFor="nome">Nome do Produto: </label>
-                            <input type="text" {...register("nome", {required: "Informe os dados do produto", minLength: 
+                            <input type="text" {...register("nome", {required: "Preenchimento do campo é obrigatório!", minLength: 
                                 {value: 3, message: "O campo deve ter no mínimo 3 caracteres"}} )}/>
                                 {errors.nome && <span style={{color: "#ff0000"}}>{errors.nome.message}</span> }
                         </div>
                         <div>
                             <label htmlFor="preco">Preço R$: </label>
-                            <input type="number" name="preco" id="preco" value={produto.preco}
-                            onChange={e=> setProduto({...produto,preco: parseInt(e.target.value)})} />
+                            <input type="number" step={0.1} {...register("preco",{required: "Preenchimento do campo é obrigatório!", min:{value:1,
+                                message:"O Valor mínimo é 1"}})}/>
+                                {errors.preco && <span style={{color: "#ff0000"}}>{errors.preco.message}</span> }
                         </div>
                         <div>
                             <label htmlFor="estoque">Estoque: </label>
-                            <input type="number" name="estoque" id="estoque" value={produto.estoque}
-                            onChange={e=> setProduto({...produto,estoque: parseInt(e.target.value)})} />
+                            <input type="number" step={1} {...register("estoque",{required: "Preenchimento do campo é obrigatório!", min:{value:1,
+                                message:"O Valor mínimo é 1"}})}/>
+                                {errors.estoque && <span style={{color: "#ff0000"}}>{errors.estoque.message}</span> }
                         </div>
+
                         <div>
                             <figure>
                                 <img src={produto.avatar} alt={produto.nome} />
