@@ -2,14 +2,14 @@
   "produtos": [
     {
       "id": "1",
-      "nome": "Head-Phones BT",
+      "nome": "Head-Phones BT Preto",
       "preco": 550,
       "estoque": 10,
       "avatar": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=120&auto=format&fit=crop&q=80"
     },
     {
       "id": "2",
-      "nome": "Teclado 94tc",
+      "nome": "Teclado 94tc Branco",
       "preco": 120,
       "estoque": 25,
       "avatar": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=120&auto=format&fit=crop&q=80"
