@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import type { TipoProdutoJ } from "../../types/types";
 import { useForm } from "react-hook-form";
@@ -25,7 +25,7 @@ export default function EditarProdutos() {
     const { id } = useParams<{ id: string }>();
 
     // Criando o recipiente da lista de dados e tipando com o tipo de produto
-    const [produto, setProduto] = useState<TipoProdutoJ>({ id: "", nome: "", preco: 0, estoque: 0, avatar: "" });
+    // const [produto, setProduto] = useState<TipoProdutoJ>({ id: "", nome: "", preco: 0, estoque: 0, avatar: "" });
 
     useEffect(() => {
         // Simulando a requisição para o backend
@@ -42,7 +42,6 @@ export default function EditarProdutos() {
 
                 const data: TipoProdutoJ = await resposta.json();
                 console.log(data);
-                setProduto(data);
                 reset(data);
 
             } catch (error) {
@@ -55,15 +54,15 @@ export default function EditarProdutos() {
 
     }, []);
 
-    const handleUpdate = async () => {
+    const handleUpdate = async (data: TipoProdutoJ) => {
         try {
 
-            const response = await fetch(`http://localhost:3001/produtos/${produto.id}`, {
+            const response = await fetch(`http://localhost:3001/produtos/${data.id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(produto)
+                body: JSON.stringify(data)
             });
 
             if (!response.ok) {
@@ -85,7 +84,7 @@ export default function EditarProdutos() {
             <h2>Editar Produtos</h2>
 
             <div>
-                <form>
+                <form onSubmit={handleSubmit(handleUpdate)}>
                     <fieldset>
                         <legend>Dados do Produto</legend>
                         <div>
@@ -103,14 +102,9 @@ export default function EditarProdutos() {
                             <input type="number" step={1} {...register("estoque", { required: "Preenchimento do campo é obrigatório!", min: { value: 1, message: "O valor mínimo é 1" } })} />
                             {errors.estoque && <span style={{ color: "#ff0000" }}>{errors.estoque.message}</span>}
                         </div>
+
                         <div>
-                            <figure>
-                                <img src={produto.avatar} alt={produto.nome} />
-                                <figcaption>{produto.nome}</figcaption>
-                            </figure>
-                        </div>
-                        <div>
-                            <button type="button" onClick={handleUpdate}>Editar</button>
+                            <button type="submit">Editar</button>
                         </div>
                     </fieldset>
                 </form>
