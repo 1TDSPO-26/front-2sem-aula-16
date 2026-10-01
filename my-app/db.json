@@ -2,21 +2,21 @@
   "produtos": [
     {
       "id": "1",
-      "nome": "Notebook",
+      "nome": "Fone",
       "preco": 3500,
       "estoque": 10,
       "avatar": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=120&auto=format&fit=crop&q=80"
     },
     {
       "id": "2",
-      "nome": "Mouse",
+      "nome": "Teclado branco",
       "preco": 1200,
       "estoque": 25,
       "avatar": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=120&auto=format&fit=crop&q=80"
     },
     {
       "id": "3",
-      "nome": "Teclado",
+      "nome": "Monitor",
       "preco": 210,
       "estoque": 8,
       "avatar": "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=120&auto=format&fit=crop&q=80"
