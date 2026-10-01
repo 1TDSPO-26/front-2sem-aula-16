@@ -2,9 +2,9 @@
   "produtos": [
     {
       "id": "1",
-      "nome": "Head-Phones BT",
-      "preco": 150,
-      "estoque": 5,
+      "nome": "Fone",
+      "preco": "155.1",
+      "estoque": "1",
       "avatar": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=120&auto=format&fit=crop&q=80"
     },
     {
