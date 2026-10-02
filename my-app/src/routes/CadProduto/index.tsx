@@ -1,19 +1,35 @@
 import { useForm } from "react-hook-form";
 import type { TipoProdutoJ } from "../../types/types";
 import { useNavigate } from "react-router";
+import { useState, type ChangeEvent } from "react";
 
 export default function CadProduto() {
 
       //Modificar o título da página;
   document.title = "Cadastrar Produtos";
   const navigate = useNavigate();
-    
-  //Declarando os componentes do hookForm
-  const{register,handleSubmit, formState:{errors}} = useForm<TipoProdutoJ>({
-    defaultValues:{ id: "", nome: "", preco: 0, estoque: 0,avatar: "" },mode:"onChange"});
 
-    const handleUpdate = async (data:TipoProdutoJ)=>{
+  //RECIPIENTE DA IMAGEM
+   const[lendoImagem,setLendoImagem] = useState<boolean>(false);
+
+  //Declarando os componentes do hookForm
+  const{register,handleSubmit,setValue,watch, formState:{errors,isSubmitting}} = useForm<TipoProdutoJ>({
+    defaultValues:{ id: "", nome: "", preco: 0, estoque: 0,avatar: "" },mode:"onChange"});
+const imagem = watch("avatar");
+
+    const onSubmit = async (data:TipoProdutoJ)=>{
       try {
+
+        if (lendoImagem) {
+          alert("Aguarde a leitura da imagem!");
+          return;
+        }
+
+        if(!data.avatar){
+          alert("Selecione uma imagem para o produto!");
+        }
+
+
 
         const response = await fetch(`http://localhost:3001/produtos/` , {
           method:"POST",
@@ -37,11 +53,53 @@ export default function CadProduto() {
       }
     }
 
+    const selecionaImagem = (event:ChangeEvent<HTMLInputElement>)=>{
+
+      const arquivo = event.target.files?.[0];
+
+      if(!arquivo){
+        return;
+      }
+
+      if(!arquivo.type.startsWith("image/")){
+        alert("Selecione um arquivo de imagem!");
+        event.target.value = "";
+        return;
+      }
+
+      if(arquivo.size > 1024 * 1024){
+        alert("A imagem deve ter no máximo 1 MB!");
+        event.target.value = "";
+        return;
+      }
+
+      const leitor = new FileReader();
+
+      setLendoImagem(true);
+
+      leitor.onload = ()=>{
+        if(typeof leitor.result === "string"){
+          setValue("avatar", leitor.result,
+            {shouldDirty:true,
+            shouldValidate:true
+          });
+         }
+         setLendoImagem(false);
+      };
+
+      leitor.onerror = ()=>{
+        alert("Não foi possível ler a imagem!");
+        setLendoImagem(false);
+      };
+
+      leitor.readAsDataURL(arquivo);
+    }
+
   return (
     <main>
         <h2>Cadastro de Produtos</h2>
         <div>
-        <form onSubmit={handleSubmit(handleUpdate)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <fieldset>
             <legend>Dados do Produto</legend>
             <div>
@@ -58,9 +116,25 @@ export default function CadProduto() {
               <label htmlFor="estoque">Estoque </label>
               <input type="number" step={1} {...register("estoque",{required: "Preenchimento do campo é obrigatório!", min:{value:1,message:"O valor minímo é 1"}})}/>
               {errors.estoque && <span style={{color:"#ff0000"}}>{errors.estoque.message}</span> }
-            </div>            
+            </div>
+
             <div>
-              <button type="submit">Cadastrar</button>
+              <label htmlFor="arquivoImg">Avatar Produto</label>
+              <input type="file" accept="image/" onChange={selecionaImagem} disabled={lendoImagem} />
+              <input type="hidden" {...register("avatar")}/>
+              {lendoImagem && <p>Lendo imagem...</p>}
+
+              {imagem && (
+                <div>
+                  <img 
+                    src={imagem}
+                    alt="Prévia da imagem do produto!"
+                    width={40} />
+                </div>
+              )}
+            </div>
+            <div>
+              <button type="submit" disabled={lendoImagem || isSubmitting}>Cadastrar</button>
             </div>
           </fieldset>
         </form>
