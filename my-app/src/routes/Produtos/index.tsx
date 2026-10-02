@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router";
 export default function Produtos() {
   document.title = "Produtos"
 
+  const navigate = useNavigate();
   const [produtos, setProdutos] = useState<TipoProdutoJson[]>([])
 
   useEffect(() => {
@@ -17,7 +18,11 @@ export default function Produtos() {
         if (!response.ok) {
           throw new Error(`Erro na listagem de produtos: ${response.status} ${response.statusText}`);
         }
-        const data: TipoProdutoJson[] = await response.json();
+        const data = (await response.json()).map((produto: TipoProdutoJson) => ({
+          ...produto,
+          preco: Number(produto.preco),
+          estoque: Number(produto.estoque),
+        }));
         console.log("Produtos carregados:", data);
         setProdutos(data);
       } catch (error) {
@@ -37,7 +42,6 @@ export default function Produtos() {
       }
 
       alert("Produto excluído com sucesso!");
-      const navigate = useNavigate();
       navigate("/produtos");
 
       // Atualizar a lista de produtos após a exclusão

@@ -3,7 +3,7 @@
     {
       "id": "1",
       "nome": "Notebook LG",
-      "preco": 4500,
+      "preco": "4500",
       "estoque": 10,
       "avatar": "avatar1.png"
     },
@@ -20,6 +20,13 @@
       "preco": 140,
       "estoque": 8,
       "avatar": "avatar3.png"
+    },
+    {
+      "nome": "mouse",
+      "preco": 200,
+      "estoque": 3,
+      "avatar": "Logo.png",
+      "id": "bRX9eub8Lfs"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

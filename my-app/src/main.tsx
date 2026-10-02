@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider  } from 'react-router'
 import Home from './routes/Home'
 import Produtos from './routes/Produtos'
 import EditarProdutos from './routes/EditarProdutos'
+import CadProduto from './routes/CadProduto/Index'
 import Error from './routes/Error'
 import App from './App'
 
@@ -15,6 +16,7 @@ import App from './App'
   {path: '/', element: <App/>, errorElement: <Error/>, children: [
     {path: '/', element: <Home/>},
     {path: '/produtos', element: <Produtos/>},
+    {path: '/cad-produto', element: <CadProduto/>},
     {path: '/editar-produtos/:id', element: <EditarProdutos/>}
   ]}
 ])  
