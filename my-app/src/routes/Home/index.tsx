@@ -22,20 +22,19 @@ type TipoUsuarioGit = {
     site_admin: boolean;
 }
 
+
 export default function Home() {
 
-    // Modificar o título da página
+    //Modificar o título da página;
     document.title = "Home";
-
 
     const [usuarios, setUsuarios] = useState<TipoUsuarioGit[]>([]);
 
     useEffect(() => {
-        // Função assíncrona
+        //Função assíncrona
         async function loadingData() {
 
             try {
-                // Request / GET
                 const response = await fetch("https://api.github.com/users");
 
                 if (!response.ok) {
@@ -51,11 +50,10 @@ export default function Home() {
             }
         }
 
-        // Executando a função
-        loadingData();
+        //Executando a função
+        // loadingData();
 
     }, []);
-
 
     return (
         <main>
@@ -68,5 +66,5 @@ export default function Home() {
                 </ul>
             </div>
         </main>
-    );
+    )
 }

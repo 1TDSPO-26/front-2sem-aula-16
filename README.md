@@ -1,3 +1,90 @@
+visite : https://alecarlosjesus.github.io/aula-code-labs/
+
+23/09/2026
+
+CONSUMO DE API - JSON-SERVER
+
+1 - No projeto atual faça a instalação do pacote do json-server
+npm install -D --save-exact json-server@latest
+
+2 - Dentro da seção scripts existente em package.json, acrescente:
+"api": "json-server db.json --port 3001"
+Esse fragmento não é um arquivo JSON completo. Adicione a vírgula entre ele e os outros scripts, preservando dev, build e lint como já estão.
+
+3 - Em um novo terminal rode:
+npm run api
+
+4 - Crie um arquivo JSON em my-app/db.json ao lado do package.json:
+
+5 - Adicione o seguinte conteúdo ao arquivo:
+{
+  "produtos": [
+    { "id": "1", "nome": "Notebook", "preco": 3500, "estoque": 10 },
+    { "id": "2", "nome": "Mouse", "preco": 120, "estoque": 25 },
+    { "id": "3", "nome": "Teclado", "preco": 210, "estoque": 8 }
+  ]
+}
+
+
+
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status
+
+	
+
+
+type TipoUsuarioGit = {
+    login: string;
+    id: number;
+    node_id: string;
+    avatar_url: string;
+    gravatar_id: string;
+    url: string;
+    html_url: string;
+    followers_url: string;
+    following_url: string;
+    gists_url: string;
+    starred_url: string;
+    subscriptions_url: string;
+    organizations_url: string;
+    repos_url: string;
+    events_url: string;
+    received_events_url: string;
+    type: string;
+    user_view_type: string;
+    site_admin:boolean;
+}
+
+
+
+Para pegar a branch do PROFESSOR LINDO!
+
+1 - Acesse a branch do professor!
+git switch feature/exemplo-pf0670
+
+2 - Depois volte para sua própria!
+git switch feature/exemplo-rmxxxxxxxx
+
+3 - Estando em sua BRANCH realize o merge com a branch do THE-BEST
+git merge feature/exemplo-pf0670
+OBS: ATENÇÃO: Pode ocorrer de aparecer conflitos, então faça o por sua conta e risco!!!!
+
+----------------------------------
+
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
 # Aula — 8 de setembro de 2026
 # Exercício — Lâmpada: variável comum versus `useState`
 

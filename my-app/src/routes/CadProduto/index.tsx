@@ -5,25 +5,17 @@ import { useState, type ChangeEvent } from "react";
 
 export default function CadProduto() {
 
-    // Modificar o título da página
+    //Modificar o título da página;
     document.title = "Cadastrar Produtos";
-
     const navigate = useNavigate();
 
-    // RECIPIENTE DA IMAGEM
+    //RECIPIENTE DA IMAGEM
     const [lendoImagem, setLendoImagem] = useState<boolean>(false);
 
-    // Declarando os componentes do hookForm
+    //Declarando os componentes do hookForm
     const { register, handleSubmit, setValue, watch, formState: { errors, isSubmitting } } = useForm<TipoProdutoJ>({
-        defaultValues: {
-            id: "",
-            nome: "",
-            preco: 0,
-            estoque: 0,
-            avatar: ""
-        }, mode: "onChange"
+        defaultValues: { id: "", nome: "", preco: 0, estoque: 0, avatar: "" }, mode: "onChange"
     });
-
     const imagem = watch("avatar");
 
     const onSubmit = async (data: TipoProdutoJ) => {
@@ -52,10 +44,10 @@ export default function CadProduto() {
                 throw new Error(`O cadastro falhou: ${response.status} - ${response.statusText}`)
             }
 
-            // MSG de SUCESSO
+            //MSG de SUCESSO
             alert("Cadastro realizado com sucesso!");
-            // Redirecionando para a página de produtos
-            navigate("/produtos")
+            //Redirecionando para a página de produtos
+            navigate("/produtos");
 
         } catch (error) {
             console.error(error);
@@ -77,7 +69,7 @@ export default function CadProduto() {
         }
 
         if (arquivo.size > 1024 * 1024) {
-            alert("A imagem deve ter no máximo 1 MB");
+            alert("A imagem deve ter no máximo 1 MB!");
             event.target.value = "";
             return;
         }
@@ -108,24 +100,23 @@ export default function CadProduto() {
     return (
         <main>
             <h2>Cadastro de Produtos</h2>
-
             <div>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <fieldset>
                         <legend>Dados do Produto</legend>
                         <div>
-                            <label htmlFor="nomeProduto">Nome Produto</label>
-                            <input type="text" {...register("nome", { required: "Preenchimento do campo é obrigatório!", minLength: { value: 3, message: "O campo deve conter no mínimo 3 caracteres!" } })} />
+                            <label htmlFor="nomeProduto">Nome Produto </label>
+                            <input type="text"  {...register("nome", { required: "Preenchimento do campo é obrigatório!", minLength: { value: 3, message: "O campo deve conter no mínimo 3 caracteres!" } })} />
                             {errors.nome && <span style={{ color: "#ff0000" }}>{errors.nome.message}</span>}
                         </div>
                         <div>
-                            <label htmlFor="preco">Preço R$</label>
-                            <input type="number" step={0.1} {...register("preco", { required: "Preenchimento do campo é obrigatório!", min: { value: 1, message: "O valor mínimo é 1" } })} />
+                            <label htmlFor="preco">Preço R$ </label>
+                            <input type="number" step={0.1} {...register("preco", { required: "Preenchimento do campo é obrigatório!", min: { value: 1, message: "O valor minímo é 1" } })} />
                             {errors.preco && <span style={{ color: "#ff0000" }}>{errors.preco.message}</span>}
                         </div>
                         <div>
-                            <label htmlFor="estoque">Em Estoque</label>
-                            <input type="number" step={1} {...register("estoque", { required: "Preenchimento do campo é obrigatório!", min: { value: 1, message: "O valor mínimo é 1" } })} />
+                            <label htmlFor="estoque">Estoque </label>
+                            <input type="number" step={1} {...register("estoque", { required: "Preenchimento do campo é obrigatório!", min: { value: 1, message: "O valor minímo é 1" } })} />
                             {errors.estoque && <span style={{ color: "#ff0000" }}>{errors.estoque.message}</span>}
                         </div>
 
@@ -143,16 +134,13 @@ export default function CadProduto() {
                                         width={40} />
                                 </div>
                             )}
-
                         </div>
-
                         <div>
                             <button type="submit" disabled={lendoImagem || isSubmitting}>Cadastrar</button>
                         </div>
                     </fieldset>
                 </form>
             </div>
-
         </main>
     )
 }

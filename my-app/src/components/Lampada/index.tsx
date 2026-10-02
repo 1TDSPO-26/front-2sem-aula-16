@@ -1,55 +1,28 @@
 import { useState } from "react";
 
-
 export default function Lampada() {
-    let lampadaComumAcesa = false;
 
-    const [lampadaStateAcesa, setLampadaStateAcesa] = useState<boolean>(false);
 
-    function alternarVariavelComum() {
-        lampadaComumAcesa = !lampadaComumAcesa;
-        console.log("Variável comum: ", lampadaComumAcesa)
-    }
+    const [acesa, setAcesa] = useState<boolean>(false);
 
-    function alternarUseState() {
-        if (!lampadaStateAcesa) {
-            setLampadaStateAcesa(true);
+    function alternaUseState() {
+
+        if (!acesa) {
+            setAcesa(true);
         } else {
-            setLampadaStateAcesa(false);
+            setAcesa(false);
         }
+
     }
+
 
     return (
-        <main>
-            <h1>Variável comum versus useState</h1>
-
-            <section>
-                <h2>Lâmpada com variável comum</h2>
-
-                <p>
-                    Estado: {lampadaComumAcesa ? " acesa" : " apagada"}
-                </p>
-
-                <img src={lampadaComumAcesa ? "images/lampada-acesa.png" : "images/lampada-apagada.png"}
-                    alt={lampadaComumAcesa ? "Lâmpada controlada por variável comum acesa" : "Lâmpada controlada por variável comum apagada"}
-                    width="150" />
-
-                <div>
-                    <button onClick={alternarVariavelComum} type="button">Alternar variável comum</button>
-                </div>
-            </section>
-
-            <section>
-                <h2>Lâmpada com useState</h2>
-                <div>
-                    <figure>
-                        <img src={lampadaStateAcesa ? "/images/lampada-acesa.png" : "/images/lampada-apagada.png"}
-                            alt={lampadaStateAcesa ? "Lâmpada acesa!" : "Lâmpada apagada!"} width="150" />
-                        <figcaption>{lampadaStateAcesa ? "Lâmpada acesa!" : "Lâmpada apagada!"}</figcaption>
-                        <button onClick={alternarUseState}>{lampadaStateAcesa ? "APAGAR" : "ACENDER"}</button>
-                    </figure>
-                </div>
-            </section>
-        </main>
+        <div>
+            <figure>
+                <img src={acesa ? "/lampada-acesa.png" : "/lampada-apagada.png"} alt={acesa ? "Lâmpada acesa!" : "Lâmpada apagada!"} width={150} />
+                <figcaption>{acesa ? "Lâmpada acesa!" : "Lâmpada apagada!"}</figcaption>
+            </figure>
+            <button onClick={alternaUseState}>{acesa ? "APAGAR" : "ACENDER"}</button>
+        </div>
     )
 }

@@ -1,10 +1,9 @@
-
 export interface TipoProduto {
     id: number,
     nome: string,
     preco: number,
     descricao: string,
-    avatar: string
+    avatar: string,
 }
 
 export type TipoProdutoJ = {
@@ -12,5 +11,5 @@ export type TipoProdutoJ = {
     nome: string;
     preco: number;
     estoque: number;
-    avatar: string
+    avatar: string;
 }
