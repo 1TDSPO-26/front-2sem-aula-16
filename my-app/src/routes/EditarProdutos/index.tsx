@@ -8,6 +8,7 @@ export default function EditarProdutos() {
   document.title = "Editar Produtos";
 
   const navigate = useNavigate();
+  
 
   //Declarando os componentes do hookForm
   const{register,handleSubimit,setValue,reset, formState:{errors}} = useForm<TipoProdutoJ>({
